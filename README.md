@@ -2,7 +2,7 @@
 
 Este proyecto implementa el servicio obtención de los mensajes de la placa Arduino MKRFOX 1200. El envío es implementado mediante la red Sigfox (ver www.sigfox.com/en).
 
-## Propósito del Repositorio ##
+## OBJETIVO DEL REPOSITORIO ##
 
 Este repositorio es usado para la gestión del ciclo de vida y las versiones del servicio de obtención de los mensajes sigfox 
 
@@ -11,7 +11,7 @@ Los datos incluidos en estos mensajes son:
 * Metadatos de la señal enviada (por ejemplo relación señal a ruido)
 * Coordenadas de geolocalizacion del dispositivo
 
-## Configuración ##
+## CONFIGURACIÓN ##
 
 Este proyecto se implementa como una aplicación de Spring Boot construida mediante maven.
 
@@ -22,6 +22,10 @@ Para la complicación del proyecto:
 Para ejecutar el proyecto:
 
 * java -jar sigfox-boot-0.0.1-SNAPSHOT.jar
+
+### Conexión a Heroku ###
+
+Los datos de conexión y despliegue a heroku son...
 
 ## ESTRUCTURA DEL PROYCTO ##
 
