@@ -1,0 +1,52 @@
+# README #
+
+Este proyecto implementa el servicio obtención de los mensajes de la placa Arduino MKRFOX 1200. El envío es implementado mediante la red Sigfox (ver www.sigfox.com/en).
+
+## Propósito del Repositorio ##
+
+Este repositorio es usado para la gestión del ciclo de vida y las versiones del servicio de obtención de los mensajes sigfox 
+
+Los datos incluidos en estos mensajes son:
+* DevideID
+* Metadatos de la señal enviada (por ejemplo relación señal a ruido)
+* Coordenadas de geolocalizacion del dispositivo
+
+## Configuración ##
+
+Este proyecto se implementa como una aplicación de Spring Boot construida mediante maven.
+
+Para la complicación del proyecto:
+
+* mvn clean install
+
+Para ejecutar el proyecto:
+
+* java -jar sigfox-boot-0.0.1-SNAPSHOT.jar
+
+## ESTRUCTURA DEL PROYCTO ##
+
+El proyecto esta estructurado en diferentes módulos maven que siguen la siguiente estructura:
+
+* **sigfox-boot**: Configuración de Spring Boot
+* **sigfox-web**: Implementación de la capa web del proyecto, implementa el API definido que da acceso a los servicios desarrollados.
+
+## PRUEBAS DE HUMO ##
+
+La ejecución de las pruebas de humo se implementa mediante una colección de pruebas de Postman (ver www.getpostman.com)
+
+***Not Yet Implemented***
+
+### Configuracion de Entorno para Ejecución de Pruebas de Humo ###
+
+***Not Yet Implemented***
+
+### Ejecución de pruebas de humo mediante Newman ###
+
+Para ejecutar la colección de pruebas es necesario instalar newman. Para la instalación de newman en windows es necesario tener instalado NodeJs y ejecutar el comando:
+
+* npm install -g newman
+
+Para la ejecución de la colección en local se deben seguir los siguientes pasos:
+
+***Not Yet Implemented***
+
