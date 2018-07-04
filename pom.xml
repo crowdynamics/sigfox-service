@@ -18,6 +18,7 @@
 	<modules>
 		<module>sigfox-boot</module>
 		<module>sigfox-web</module>
+		<module>sigfox-db</module>
 	</modules>
 
 	<properties>

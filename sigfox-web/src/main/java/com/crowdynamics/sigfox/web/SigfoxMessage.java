@@ -7,8 +7,8 @@ public class SigfoxMessage {
 	private String deviceId;
 	private String time;
 	private String seqNumber;
-	private List<Reception> reception;
-	private List<Geoloc> geoloc;
+	private Reception reception;
+	private Geoloc geoloc;
 	
 	public String getDeviceId() {
 		return deviceId;
@@ -30,16 +30,16 @@ public class SigfoxMessage {
 	}
 	
 	
-	public List<Reception> getReception() {
+	public Reception getReception() {
 		return reception;
 	}
-	public void setReception(List<Reception> reception) {
+	public void setReception(Reception reception) {
 		this.reception = reception;
 	}
-	public List<Geoloc> getGeoloc() {
+	public Geoloc getGeoloc() {
 		return geoloc;
 	}
-	public void setGeoloc(List<Geoloc> geoloc) {
+	public void setGeoloc(Geoloc geoloc) {
 		this.geoloc = geoloc;
 	}
 	@Override
