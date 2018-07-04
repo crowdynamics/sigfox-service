@@ -1,6 +1,4 @@
-package com.crowdynamics.sigfox.web;
-
-import java.util.List;
+package com.crowdynamics.sigfox.domain;
 
 public class SigfoxMessage {
 	

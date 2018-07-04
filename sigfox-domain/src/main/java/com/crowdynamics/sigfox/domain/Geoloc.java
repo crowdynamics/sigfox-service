@@ -1,4 +1,4 @@
-package com.crowdynamics.sigfox.web;
+package com.crowdynamics.sigfox.domain;
 
 public class Geoloc {
 	
