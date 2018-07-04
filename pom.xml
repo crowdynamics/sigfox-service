@@ -20,12 +20,15 @@
 		<module>sigfox-web</module>
 		<module>sigfox-db</module>
         <module>sigfox-domain</module>
-    </modules>
+        <module>sigfox-dao</module>
+		<module>sigfox-entity</module>
+	</modules>
 
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
 		<java.version>1.8</java.version>
+		<java.persistence.version>2.2</java.persistence.version>
 	</properties>
 
 	<dependencyManagement>
@@ -40,6 +43,24 @@
 				<groupId>com.crowdynamics.sigfox</groupId>
 				<artifactId>sigfox-domain</artifactId>
 				<version>${project.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>com.crowdynamics.sigfox</groupId>
+				<artifactId>sigfox-dao</artifactId>
+				<version>${project.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>com.crowdynamics.sigfox</groupId>
+				<artifactId>sigfox-entity</artifactId>
+				<version>${project.version}</version>
+			</dependency>
+
+			<!-- Persistence -->
+			<!-- https://mvnrepository.com/artifact/javax.persistence/javax.persistence-api -->
+			<dependency>
+				<groupId>javax.persistence</groupId>
+				<artifactId>javax.persistence-api</artifactId>
+				<version>${java.persistence.version}</version>
 			</dependency>
 		</dependencies>
 	</dependencyManagement>
