@@ -27,16 +27,16 @@ Para ejecutar el proyecto:
 
 Los datos de conexión y despliegue a heroku son:
 
-Host
-ec2-54-75-244-248.eu-west-1.compute.amazonaws.com
-Database
-d9n4pkcd0ismmi
-Port
-5432
-URI
-postgres://grxrjgduyrogvs:dc87ed052bc2c00c1821cce5daaef9b5264c45703e30c379df5477a0787adbf3@ec2-54-75-244-248.eu-west-1.compute.amazonaws.com:5432/d9n4pkcd0ismmi
-Heroku CLI
-heroku pg:psql postgresql-clear-68549 --app sigfox-service
+* Host
+    * ec2-54-75-244-248.eu-west-1.compute.amazonaws.com
+* Database
+    * d9n4pkcd0ismmi
+* Port
+    * 5432
+* URI
+    * postgres://grxrjgduyrogvs:dc87ed052bc2c00c1821cce5daaef9b5264c45703e30c379df5477a0787adbf3@ec2-54-75-244-248.eu-west-1.compute.amazonaws.com:5432/d9n4pkcd0ismmi
+* Heroku CLI
+    * heroku pg:psql postgresql-clear-68549 --app sigfox-service
 
 
 ## ESTRUCTURA DEL PROYCTO ##
