@@ -20,7 +20,9 @@
 		<module>sigfox-web</module>
 		<module>sigfox-db</module>
         <module>sigfox-domain</module>
-    </modules>
+        <module>sigfox-dao</module>
+		<module>sigfox-entity</module>
+	</modules>
 
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
@@ -39,6 +41,16 @@
 			<dependency>
 				<groupId>com.crowdynamics.sigfox</groupId>
 				<artifactId>sigfox-domain</artifactId>
+				<version>${project.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>com.crowdynamics.sigfox</groupId>
+				<artifactId>sigfox-dao</artifactId>
+				<version>${project.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>com.crowdynamics.sigfox</groupId>
+				<artifactId>sigfox-entity</artifactId>
 				<version>${project.version}</version>
 			</dependency>
 		</dependencies>
