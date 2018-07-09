@@ -29,6 +29,12 @@
 			<artifactId>sigfox-domain</artifactId>
 		</dependency>
 
+
+		<dependency>
+			<groupId>com.crowdynamics.sigfox</groupId>
+			<artifactId>sigfox-dao</artifactId>
+		</dependency>
+
 		<!-- Test dependencies -->
 		<dependency>
 			<groupId>junit</groupId>
