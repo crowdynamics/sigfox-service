@@ -22,6 +22,7 @@
 		<module>sigfox-domain</module>
 		<module>sigfox-dao</module>
 		<module>sigfox-entity</module>
+		<module>sigfox-api</module>
 	</modules>
 
 	<properties>
