@@ -2,6 +2,7 @@ package com.crowdynamics.sigfox.model;
 
 public class SigfoxMessage {
 	
+	private Long id;
 	private String deviceId;
 	private String time;
 	private String seqNumber;
@@ -39,10 +40,11 @@ public class SigfoxMessage {
 	}
 	public void setGeoloc(Geoloc geoloc) {
 		this.geoloc = geoloc;
+	}	
+	public Long getId() {
+		return id;
 	}
-	@Override
-	public String toString() {
-		return "SigfoxMessage [deviceId=" + deviceId + ", time=" + time + ", seqNumber=" + seqNumber + ", reception="
-				+ reception + ", geoloc=" + geoloc + "]";
+	public void setId(Long id) {
+		this.id = id;
 	}
 }
