@@ -1,4 +1,4 @@
-package com.crowdynamics.sigfox.dao.config;
+package com.crowdynamics.sigfox.config;
 
 import org.hibernate.jpa.HibernatePersistenceProvider;
 import org.springframework.context.annotation.Bean;

@@ -1,4 +1,4 @@
-package com.crowdynamics.sigfox.domain;
+package com.crowdynamics.sigfox.model;
 
 public class SigfoxMessage {
 	

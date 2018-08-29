@@ -1,7 +1,8 @@
 package test.crowdynamics.sigfox.dao;
 
-import com.crowdynamics.sigfox.dao.jpa.SigfoxMessageDAO;
-import com.crowdynamics.sigfox.entity.SigfoxMessagesEntity;
+import com.crowdynamics.sigfox.model.SigfoxMessagesEntity;
+import com.crowdynamics.sigfox.repository.SigfoxMessageDAO;
+
 import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;

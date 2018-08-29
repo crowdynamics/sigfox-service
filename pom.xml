@@ -17,12 +17,6 @@
 
 	<modules>
 		<module>sigfox-boot</module>
-		<module>sigfox-web</module>
-		<module>sigfox-db</module>
-		<module>sigfox-domain</module>
-		<module>sigfox-dao</module>
-		<module>sigfox-entity</module>
-		<module>sigfox-api</module>
 	</modules>
 
 	<properties>
