@@ -1,7 +1,5 @@
-<?xml version="1.0" encoding="UTF-8"?>
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
-	<modelVersion>4.0.0</modelVersion>
 
 	<parent>
 		<groupId>org.springframework.boot</groupId>
@@ -9,15 +7,15 @@
 		<version>2.0.2.RELEASE</version>
 		<relativePath />
 	</parent>
+	
+	<modelVersion>4.0.0</modelVersion>
 
 	<groupId>com.crowdynamics.sigfox</groupId>
 	<artifactId>sigfox</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
-	<packaging>pom</packaging>
 
-	<modules>
-		<module>sigfox-boot</module>
-	</modules>
+	<name>sigfox</name>
+	<packaging>jar</packaging>
 
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
@@ -29,27 +27,6 @@
 
 	<dependencyManagement>
 		<dependencies>
-			<!-- Internal modules dependenci managemnet -->
-			<dependency>
-				<groupId>com.crowdynamics.sigfox</groupId>
-				<artifactId>sigfox-web</artifactId>
-				<version>${project.version}</version>
-			</dependency>
-			<dependency>
-				<groupId>com.crowdynamics.sigfox</groupId>
-				<artifactId>sigfox-domain</artifactId>
-				<version>${project.version}</version>
-			</dependency>
-			<dependency>
-				<groupId>com.crowdynamics.sigfox</groupId>
-				<artifactId>sigfox-dao</artifactId>
-				<version>${project.version}</version>
-			</dependency>
-			<dependency>
-				<groupId>com.crowdynamics.sigfox</groupId>
-				<artifactId>sigfox-entity</artifactId>
-				<version>${project.version}</version>
-			</dependency>
 
 			<!-- Persistence -->
 			<!-- https://mvnrepository.com/artifact/javax.persistence/javax.persistence-api -->
@@ -66,4 +43,47 @@
 			</dependency>
 		</dependencies>
 	</dependencyManagement>
+
+	<dependencies>
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-web</artifactId>
+		</dependency>
+
+		<dependency>
+			<groupId>org.springframework.data</groupId>
+			<artifactId>spring-data-jpa</artifactId>
+		</dependency>
+
+		<dependency>
+			<groupId>org.hibernate</groupId>
+			<artifactId>hibernate-entitymanager</artifactId>
+		</dependency>
+
+		<dependency>
+			<groupId>javax.persistence</groupId>
+			<artifactId>javax.persistence-api</artifactId>
+		</dependency>
+
+		<dependency>
+			<groupId>org.postgresql</groupId>
+			<artifactId>postgresql</artifactId>
+			<scope>runtime</scope>
+		</dependency>
+
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-test</artifactId>
+			<scope>test</scope>
+		</dependency>
+	</dependencies>
+
+	<build>
+		<plugins>
+			<plugin>
+				<groupId>org.springframework.boot</groupId>
+				<artifactId>spring-boot-maven-plugin</artifactId>
+			</plugin>
+		</plugins>
+	</build>
 </project>
