@@ -41,10 +41,7 @@ Los datos de conexión y despliegue a heroku son:
 
 ## ESTRUCTURA DEL PROYCTO ##
 
-El proyecto esta estructurado en diferentes módulos maven que siguen la siguiente estructura:
-
-* **sigfox-boot**: Configuración de Spring Boot
-* **sigfox-web**: Implementación de la capa web del proyecto, implementa el API definido que da acceso a los servicios desarrollados.
+***TODO***
 
 ## PRUEBAS DE HUMO ##
 
