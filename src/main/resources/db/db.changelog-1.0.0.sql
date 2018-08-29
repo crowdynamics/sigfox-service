@@ -1,3 +1,6 @@
+--liquibase formatted sql
+
+--changeset crowdynamics:1
 CREATE TABLE SIGFOX_MESSAGES (
 ID BIGSERIAL, 
 DEVICE_ID VARCHAR(6) NOT NULL,
@@ -12,3 +15,4 @@ GEOLOC_RADIUS NUMERIC (6,2) NOT NULL,
 
 PRIMARY KEY (ID)
 );
+--rollback DROP TABLE SIGFOX_MESSAGES;
