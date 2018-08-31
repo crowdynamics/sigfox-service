@@ -1,7 +1,6 @@
 package com.crowdynamics.sigfox.services;
 
 import java.util.List;
-import java.util.Optional;
 
 import com.crowdynamics.sigfox.model.SigfoxMessage;
 

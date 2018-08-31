@@ -1,16 +1,24 @@
 package com.crowdynamics.sigfox;
 
+import java.util.List;
+
+import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.test.context.jdbc.Sql;
 import org.springframework.test.context.junit4.SpringRunner;
+
+import com.crowdynamics.sigfox.model.SigfoxMessage;
+import com.crowdynamics.sigfox.services.SigFoxMessageService;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest
 public class SigfoxMessageServiceTest {
 
     @Autowired
-    private SigfoxMessageService sigfoxMessageService;
+    private SigFoxMessageService sigfoxMessageService;
 	
 	/**
 	 * Test crear mensaje: Se llama al servicio de creacion de mensajes
@@ -25,6 +33,15 @@ public class SigfoxMessageServiceTest {
 	/**
 	 * Test obtener todos los mensajes: Devuelve una lista vacia si no hay mensajes
 	 */
+    @Test
+    @Sql(scripts="src/test/resources/insertSigFoxMessage.sql")
+    public void testFindAll(){
+    	List<SigfoxMessage> sigFoxMessageList=  sigFoxMessageList=sigfoxMessageService.findAll();
+    	Assert.assertNotNull(sigFoxMessageList);
+    	
+    	
+    	
+    }
 	
 	/**
 	 * Test obtener todos los mensajes: Devuelve una lista vacia con un elemento previamente
