@@ -37,7 +37,7 @@ public class SigfoxMessageServiceTest {
     @Sql({"classpath:insertSigFoxMessage.sql"})
     public void testFindAll(){
     	
-    	List<SigfoxMessage> sigFoxMessageList = sigFoxMessageList=sigfoxMessageService.findAll();
+    	List<SigfoxMessage> sigFoxMessageList =sigfoxMessageService.findAll();
     	
     	Assert.assertNotNull(sigFoxMessageList);
     }
