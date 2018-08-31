@@ -10,7 +10,7 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 
 @Entity
-@Table(name = "sigfox_messages", schema = "public", catalog = "d9n4pkcd0ismmi")
+@Table(name = "sigfox_messages")
 public class SigfoxMessage {
 	private Long id;
 	private String deviceId;

@@ -2,7 +2,10 @@ package com.crowdynamics.sigfox;
 
 import java.math.BigDecimal;
 import java.sql.Timestamp;
+import java.util.Calendar;
+import java.util.GregorianCalendar;
 import java.util.List;
+
 import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -10,6 +13,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.jdbc.Sql;
 import org.springframework.test.context.junit4.SpringRunner;
+
 import com.crowdynamics.sigfox.model.SigfoxMessage;
 import com.crowdynamics.sigfox.services.SigFoxMessageService;
 
@@ -19,8 +23,8 @@ public class SigfoxMessageServiceTest {
 
     private static final Long ID = 1L;
 	private static final String DEVICE_ID = "TEST01";
-	private static final Timestamp MESSAGE_DATE = null;
-	private static final Integer SEQ_NUMBER = 1;
+	private static final Timestamp MESSAGE_DATE = new Timestamp(new GregorianCalendar(2018, Calendar.SEPTEMBER, 1).getTime().getTime());
+	private static final int SEQ_NUMBER = 1;
 	private static final String RECEPTION_ID = "2";
 	private static final BigDecimal RECEPTION_SSI = new BigDecimal(3);
 	private static final BigDecimal RECEPTION_SNR = new BigDecimal(4) ;
@@ -54,6 +58,15 @@ public class SigfoxMessageServiceTest {
     	Assert.assertEquals(1, sigFoxMessageList.size());
     	
     	Assert.assertEquals(ID, sigFoxMessageList.get(0).getId());
+    	Assert.assertEquals(DEVICE_ID, sigFoxMessageList.get(0).getDeviceId());
+    	Assert.assertEquals(MESSAGE_DATE, sigFoxMessageList.get(0).getMessageDate());
+    	Assert.assertEquals(SEQ_NUMBER, sigFoxMessageList.get(0).getSeqnumer());
+    	Assert.assertEquals(RECEPTION_ID, sigFoxMessageList.get(0).getReceptionId());
+    	Assert.assertEquals(RECEPTION_SSI, sigFoxMessageList.get(0).getReceptionRssi());
+    	Assert.assertEquals(RECEPTION_SNR, sigFoxMessageList.get(0).getReceptionSnr());
+    	Assert.assertEquals(GEO_LOC_LAT, sigFoxMessageList.get(0).getGeolocLat());mvn c
+    	Assert.assertEquals(GEO_LOC_LONG, sigFoxMessageList.get(0).getGeolocLon());
+    	Assert.assertEquals(GEO_LOC_RADIUS, sigFoxMessageList.get(0).getGeolocRadius());
     }
 	
 	/**
