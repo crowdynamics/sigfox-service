@@ -34,13 +34,12 @@ public class SigfoxMessageServiceTest {
 	 * Test obtener todos los mensajes: Devuelve una lista vacia si no hay mensajes
 	 */
     @Test
-    @Sql(scripts="src/test/resources/insertSigFoxMessage.sql")
+    @Sql({"classpath:insertSigFoxMessage.sql"})
     public void testFindAll(){
-    	List<SigfoxMessage> sigFoxMessageList=  sigFoxMessageList=sigfoxMessageService.findAll();
+    	
+    	List<SigfoxMessage> sigFoxMessageList = sigFoxMessageList=sigfoxMessageService.findAll();
+    	
     	Assert.assertNotNull(sigFoxMessageList);
-    	
-    	
-    	
     }
 	
 	/**
