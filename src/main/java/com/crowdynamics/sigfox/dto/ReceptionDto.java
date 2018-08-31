@@ -1,6 +1,6 @@
-package com.crowdynamics.sigfox.model;
+package com.crowdynamics.sigfox.dto;
 
-public class Reception {
+public class ReceptionDto {
 
 	public String id;
 	public String rssi;

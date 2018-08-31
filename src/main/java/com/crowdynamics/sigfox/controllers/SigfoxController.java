@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.crowdynamics.sigfox.model.SigfoxMessage;
+import com.crowdynamics.sigfox.dto.SigfoxMessageDto;
 
 @RestController
 @RequestMapping(value = "/sigfox")
@@ -17,20 +17,20 @@ public class SigfoxController {
 
 
 	@RequestMapping(method = RequestMethod.POST)
-	public ResponseEntity<SigfoxMessage> create(@RequestBody SigfoxMessage sigfoxMessage)	{
+	public ResponseEntity<SigfoxMessageDto> create(@RequestBody SigfoxMessageDto sigfoxMessage)	{
 	
 		
 		return null;
 	}
 
     @RequestMapping(method = RequestMethod.GET)
-    public ResponseEntity<List<SigfoxMessage>> get()	{
+    public ResponseEntity<List<SigfoxMessageDto>> get()	{
 
         return null;
     }
     
     @RequestMapping(value="/{id}", method = RequestMethod.GET)
-    public ResponseEntity<List<SigfoxMessage>> getById(@PathVariable(value = "id") Long id)	{
+    public ResponseEntity<List<SigfoxMessageDto>> getById(@PathVariable(value = "id") Long id)	{
         
 
 

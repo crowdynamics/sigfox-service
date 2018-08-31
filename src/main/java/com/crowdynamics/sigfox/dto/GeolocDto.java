@@ -1,6 +1,6 @@
-package com.crowdynamics.sigfox.model;
+package com.crowdynamics.sigfox.dto;
 
-public class Geoloc {
+public class GeolocDto {
 	
 	public String latitude;
 	public String longitude;
