@@ -1,6 +1,7 @@
 package com.crowdynamics.sigfox.services;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -18,8 +19,8 @@ public class SigFoxMessageServiceImpl implements SigFoxMessageService {
 		return sigfoxMessageDAO.save(sigFoxMessage);
 	}
 
-	public SigfoxMessage findById(Long id) {
-		return null;
+	public Optional<SigfoxMessage> findById(Long id) {
+		return sigfoxMessageDAO.findById(id);
 	}
 
 	public List<SigfoxMessage> findAll() {

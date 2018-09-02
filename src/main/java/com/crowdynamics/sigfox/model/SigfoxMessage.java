@@ -6,6 +6,8 @@ import java.util.Objects;
 import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
@@ -15,7 +17,7 @@ public class SigfoxMessage {
 	private Long id;
 	private String deviceId;
 	private Timestamp messageDate;
-	private int seqnumer;
+	private Integer seqnumer;
 	private String receptionId;
 	private BigDecimal receptionRssi;
 	private BigDecimal receptionSnr;
@@ -24,7 +26,8 @@ public class SigfoxMessage {
 	private BigDecimal geolocRadius;
 
 	@Id
-	@Column(name = "id")
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@Column(name = "id", updatable = false, nullable = false)
 	public Long getId() {
 		return id;
 	}
@@ -55,11 +58,11 @@ public class SigfoxMessage {
 
 	@Basic
 	@Column(name = "seqnumer")
-	public int getSeqnumer() {
+	public Integer getSeqnumer() {
 		return seqnumer;
 	}
 
-	public void setSeqnumer(int seqnumer) {
+	public void setSeqnumer(Integer seqnumer) {
 		this.seqnumer = seqnumer;
 	}
 
