@@ -7,7 +7,7 @@ import com.crowdynamics.sigfox.model.SigfoxMessage;
 
 public interface SigFoxMessageService {
 
-	SigfoxMessage save(SigfoxMessage sigfoxMessage);
+	SigfoxMessage save(SigfoxMessage sigfoxMessage) ;
 
 	Optional<SigfoxMessage> findById(Long id);
 

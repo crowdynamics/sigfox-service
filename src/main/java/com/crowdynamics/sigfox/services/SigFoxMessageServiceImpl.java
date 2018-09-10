@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 
 import com.crowdynamics.sigfox.model.SigfoxMessage;
 import com.crowdynamics.sigfox.repository.SigfoxMessageDAO;
+import com.crowdynamics.sigfox.sigfoxServiceException.SigfoxServiceException;
 
 @Service
 public class SigFoxMessageServiceImpl implements SigFoxMessageService {
@@ -16,15 +17,48 @@ public class SigFoxMessageServiceImpl implements SigFoxMessageService {
 	private SigfoxMessageDAO sigfoxMessageDAO;
 
 	public SigfoxMessage save(SigfoxMessage sigFoxMessage) {
-		return sigfoxMessageDAO.save(sigFoxMessage);
+
+		SigfoxMessage newSigFoxMessage = new SigfoxMessage();
+
+		try {
+			newSigFoxMessage = sigfoxMessageDAO.save(sigFoxMessage);
+
+			return newSigFoxMessage;
+
+		} catch (RuntimeException e) {
+
+			throw new SigfoxServiceException("Error in SigfoxMessageDAO.save ", e);
+
+		}
+
 	}
 
 	public Optional<SigfoxMessage> findById(Long id) {
-		return sigfoxMessageDAO.findById(id);
+
+		try {
+			Optional<SigfoxMessage> sigfoxMessageList = sigfoxMessageDAO.findById(id);
+			return sigfoxMessageList;
+
+		} catch (RuntimeException e) {
+
+			throw new SigfoxServiceException("Error in SigfoxMessageDAO.findById ", e);
+
+		}
+
 	}
 
 	public List<SigfoxMessage> findAll() {
-		return sigfoxMessageDAO.findAll();
+
+		try {
+			List<SigfoxMessage> sigfoxMessageList = sigfoxMessageDAO.findAll();
+
+			return sigfoxMessageList;
+		}
+
+		catch (RuntimeException e) {
+			throw new SigfoxServiceException("Error in SigfoxMessageDAO.findAll ", e);
+
+		}
 	}
 
 }
