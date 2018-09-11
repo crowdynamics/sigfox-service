@@ -1,11 +1,13 @@
 package com.crowdynamics.sigfox.dto;
 
+import java.sql.Timestamp;
+
 public class SigfoxMessageDto {
 	
 	private Long id;
 	private String deviceId;
-	private String time;
-	private String seqNumber;
+	private Timestamp time;
+	private Integer seqNumber;
 	private ReceptionDto reception;
 	private GeolocDto geoloc;
 	
@@ -15,16 +17,16 @@ public class SigfoxMessageDto {
 	public void setDeviceId(String deviceId) {
 		this.deviceId = deviceId;
 	}
-	public String getTime() {
+	public Timestamp getTime() {
 		return time;
 	}
-	public void setTime(String time) {
+	public void setTime(Timestamp time) {
 		this.time = time;
 	}
-	public String getSeqNumber() {
+	public Integer getSeqNumber() {
 		return seqNumber;
 	}
-	public void setSeqNumber(String seqNumber) {
+	public void setSeqNumber(Integer seqNumber) {
 		this.seqNumber = seqNumber;
 	}
 	

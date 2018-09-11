@@ -1,10 +1,12 @@
 package com.crowdynamics.sigfox.dto;
 
+import java.math.BigDecimal;
+
 public class ReceptionDto {
 
 	public String id;
-	public String rssi;
-	public String snr;
+	public BigDecimal rssi;
+	public BigDecimal snr;
 	
 	public String getId() {
 		return id;
@@ -13,16 +15,16 @@ public class ReceptionDto {
 		this.id = id;
 	}
 
-	public String getRssi() {
+	public BigDecimal getRssi() {
 		return rssi;
 	}
-	public void setRssi(String rssi) {
+	public void setRssi(BigDecimal rssi) {
 		this.rssi = rssi;
 	}
-	public String getSnr() {
+	public BigDecimal getSnr() {
 		return snr;
 	}
-	public void setSnr(String snr) {
+	public void setSnr(BigDecimal snr) {
 		this.snr = snr;
 	}
 	@Override

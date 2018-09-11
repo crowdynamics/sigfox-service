@@ -1,27 +1,29 @@
 package com.crowdynamics.sigfox.dto;
 
+import java.math.BigDecimal;
+
 public class GeolocDto {
 	
-	public String latitude;
-	public String longitude;
-	public String radius;
-	public String getLatitude() {
+	public BigDecimal latitude;
+	public BigDecimal longitude;
+	public BigDecimal radius;
+	public BigDecimal getLatitude() {
 		return latitude;
 	}
-	public void setLatitude(String latitude) {
+	public void setLatitude(BigDecimal latitude) {
 		this.latitude = latitude;
 	}
-	public String getLongitude() {
+	public BigDecimal getLongitude() {
 		return longitude;
 	}
 	
-	public void setLongitude(String longitude) {
+	public void setLongitude(BigDecimal longitude) {
 		this.longitude = longitude;
 	}
-	public String getRadius() {
+	public BigDecimal getRadius() {
 		return radius;
 	}
-	public void setRadius(String radius) {
+	public void setRadius(BigDecimal radius) {
 		this.radius = radius;
 	}
 	@Override
