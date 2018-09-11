@@ -1,0 +1,70 @@
+{
+	"variables": [],
+	"info": {
+		"name": "SigfoxMessageServiceSmokeTest",
+		"_postman_id": "5afd1c66-17d9-d319-d6bf-89a44625f5da",
+		"description": "",
+		"schema": "https://schema.getpostman.com/json/collection/v2.0.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "saveMessage",
+			"request": {
+				"url": "{{baseUrl}}/sigfox",
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/x-www-form-urlencoded",
+						"description": ""
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "\"id\":\"1\",\r\n\"deviceId\":\"0F2223\",\r\n\"time\":\"01/10/2018\",\r\n\"seqNumber\":\"1\",\r\n\"reception\":[\r\n\"id\":\"3\",\r\n\"rssi\":\"20\",\r\n\"snr\":\"30\"\r\n],\r\n\"Geoloc\":[\r\n\"latitude\":\"30\",\r\n\"longitude\":\"3\",\r\n\"radius\":\"2\"\r\n]"
+				},
+				"description": "http post message for saving a sigfoxMessage"
+			},
+			"response": []
+		},
+		{
+			"name": "getAllMessages",
+			"request": {
+				"url": "{{baseUrl}}/sigfox",
+				"method": "GET",
+				"header": [],
+				"body": {},
+				"description": "http post message for saving a sigfoxMessage"
+			},
+			"response": []
+		},
+		{
+			"name": "getMessageById",
+			"request": {
+				"url": {
+					"raw": "{{baseUrl}}/sigfox?id=2",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"sigfox"
+					],
+					"query": [
+						{
+							"key": "id",
+							"value": "2",
+							"equals": true,
+							"description": ""
+						}
+					],
+					"variable": []
+				},
+				"method": "GET",
+				"header": [],
+				"body": {},
+				"description": "http post message for saving a sigfoxMessage"
+			},
+			"response": []
+		}
+	]
+}
