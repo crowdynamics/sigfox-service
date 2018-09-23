@@ -12,57 +12,30 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.crowdynamics.sigfox.dto.GeolocDto;
-import com.crowdynamics.sigfox.dto.ReceptionDto;
+import com.crowdynamics.sigfox.converters.SigfoxMessageDtoToMessageConverter;
+import com.crowdynamics.sigfox.converters.SigfoxMessageToDtoConverter;
 import com.crowdynamics.sigfox.dto.SigfoxMessageDto;
 import com.crowdynamics.sigfox.model.SigfoxMessage;
-import com.crowdynamics.sigfox.repository.SigfoxMessageDAO;
+import com.crowdynamics.sigfox.services.SigFoxMessageServiceImpl;
 
 @RestController
 @RequestMapping(value = "/sigfox")
 public class SigfoxController {
 
-	private SigfoxMessageDAO sigfoxMessageDAO;
+	private SigFoxMessageServiceImpl sigFoxMessageService;
 
 	@RequestMapping(method = RequestMethod.POST)
 	public ResponseEntity<SigfoxMessageDto> create(@RequestBody SigfoxMessageDto sigfoxMessageDto) {
 
 		// Mapeo entre el DTO y el Model (Tabla BBDD)
-		SigfoxMessage sigfoxMessage = new SigfoxMessage();
-		sigfoxMessage.setDeviceId(sigfoxMessageDto.getDeviceId());
-		sigfoxMessage.setId(sigfoxMessageDto.getId());
-		sigfoxMessage.setGeolocLat(sigfoxMessageDto.getGeoloc().getLatitude());
-		sigfoxMessage.setGeolocLon(sigfoxMessageDto.getGeoloc().getLongitude());
-		sigfoxMessage.setGeolocRadius(sigfoxMessageDto.getGeoloc().getRadius());
-		sigfoxMessage.setMessageDate(sigfoxMessageDto.getTime());
-		sigfoxMessage.setReceptionId(sigfoxMessageDto.getReception().getId());
-		sigfoxMessage.setReceptionRssi(sigfoxMessageDto.getReception().getRssi());
-		sigfoxMessage.setReceptionSnr(sigfoxMessageDto.getReception().getSnr());
-		sigfoxMessage.setSeqnumer(sigfoxMessageDto.getSeqNumber());
-
 		// Una vez está el Model Mapeado, se guarda en BBDD
-		SigfoxMessage newSigfoxMessage = sigfoxMessageDAO.save(sigfoxMessage);
+		SigfoxMessage newSigfoxMessage = sigFoxMessageService
+				.save(SigfoxMessageDtoToMessageConverter.convertToMessage(sigfoxMessageDto));
 
 		// Mapeo entre Model y DTO
-		SigfoxMessageDto newSigfoxMessageDto = new SigfoxMessageDto();
-		GeolocDto geoLocDto = new GeolocDto();
-		geoLocDto.setLatitude(newSigfoxMessage.getGeolocLat());
-		geoLocDto.setLongitude(newSigfoxMessage.getGeolocLon());
-		geoLocDto.setRadius(newSigfoxMessage.getGeolocRadius());
 
-		ReceptionDto receptionDto = new ReceptionDto();
-		receptionDto.setId(newSigfoxMessage.getDeviceId());
-		receptionDto.setRssi(newSigfoxMessage.getReceptionRssi());
-		receptionDto.setSnr(newSigfoxMessage.getReceptionSnr());
-
-		newSigfoxMessageDto.setDeviceId(newSigfoxMessage.getDeviceId());
-		newSigfoxMessageDto.setId(newSigfoxMessage.getId());
-		newSigfoxMessageDto.setReception(receptionDto);
-		newSigfoxMessageDto.setSeqNumber(newSigfoxMessage.getSeqnumer());
-		newSigfoxMessageDto.setTime(newSigfoxMessage.getMessageDate());
-
-		ResponseEntity<SigfoxMessageDto> response = new ResponseEntity<SigfoxMessageDto>(newSigfoxMessageDto,
-				HttpStatus.OK);
+		ResponseEntity<SigfoxMessageDto> response = new ResponseEntity<SigfoxMessageDto>(
+				SigfoxMessageToDtoConverter.convertToDto(newSigfoxMessage), HttpStatus.OK);
 
 		return response;
 	}
@@ -71,32 +44,14 @@ public class SigfoxController {
 	public ResponseEntity<List<SigfoxMessageDto>> get() {
 
 		// Recuperamos todos los mensajes
-		List<SigfoxMessage> sigfoxMessageList = sigfoxMessageDAO.findAll();
+		List<SigfoxMessage> sigfoxMessageList = sigFoxMessageService.findAll();
 
 		// Mapeamos entre elementos
 		List<SigfoxMessageDto> sigfoxMessageListDto = new ArrayList<SigfoxMessageDto>();
-		SigfoxMessageDto sigfoxMessageDto = new SigfoxMessageDto();
-		GeolocDto geoLocDto = new GeolocDto();
-		ReceptionDto receptionDto = new ReceptionDto();
 
-		for (SigfoxMessage sigfoxMessage : sigfoxMessageList) {
-			// Mapeo entre Model y DTO elemento a elemento
+		sigfoxMessageList.forEach(
+				SigfoxMessage -> sigfoxMessageListDto.add(SigfoxMessageToDtoConverter.convertToDto(SigfoxMessage)));
 
-			geoLocDto.setLatitude(sigfoxMessage.getGeolocLat());
-			geoLocDto.setLongitude(sigfoxMessage.getGeolocLon());
-			geoLocDto.setRadius(sigfoxMessage.getGeolocRadius());
-
-			receptionDto.setId(sigfoxMessage.getDeviceId());
-			receptionDto.setRssi(sigfoxMessage.getReceptionRssi());
-			receptionDto.setSnr(sigfoxMessage.getReceptionSnr());
-
-			sigfoxMessageDto.setDeviceId(sigfoxMessage.getDeviceId());
-			sigfoxMessageDto.setId(sigfoxMessage.getId());
-			sigfoxMessageDto.setReception(receptionDto);
-			sigfoxMessageDto.setSeqNumber(sigfoxMessage.getSeqnumer());
-			sigfoxMessageDto.setTime(sigfoxMessage.getMessageDate());
-			sigfoxMessageListDto.add(sigfoxMessageDto);
-		}
 		ResponseEntity<List<SigfoxMessageDto>> response = new ResponseEntity<List<SigfoxMessageDto>>(
 				sigfoxMessageListDto, HttpStatus.OK);
 
@@ -106,26 +61,10 @@ public class SigfoxController {
 	@GetMapping("/{id}")
 	public ResponseEntity<SigfoxMessageDto> getById(@PathVariable(value = "id") Long id) {
 		// Recuperamos el mensaje
-		SigfoxMessage sigfoxMessage = sigfoxMessageDAO.findById(id).get();
-		
+		SigfoxMessage sigfoxMessage = sigFoxMessageService.findById(id).get();
+
 		// Mapeo entre Model y DTO
-		SigfoxMessageDto sigfoxMessageDto = new SigfoxMessageDto();
-		GeolocDto geoLocDto = new GeolocDto();
-		ReceptionDto receptionDto = new ReceptionDto();
-
-		geoLocDto.setLatitude(sigfoxMessage.getGeolocLat());
-		geoLocDto.setLongitude(sigfoxMessage.getGeolocLon());
-		geoLocDto.setRadius(sigfoxMessage.getGeolocRadius());
-
-		receptionDto.setId(sigfoxMessage.getDeviceId());
-		receptionDto.setRssi(sigfoxMessage.getReceptionRssi());
-		receptionDto.setSnr(sigfoxMessage.getReceptionSnr());
-
-		sigfoxMessageDto.setDeviceId(sigfoxMessage.getDeviceId());
-		sigfoxMessageDto.setId(sigfoxMessage.getId());
-		sigfoxMessageDto.setReception(receptionDto);
-		sigfoxMessageDto.setSeqNumber(sigfoxMessage.getSeqnumer());
-		sigfoxMessageDto.setTime(sigfoxMessage.getMessageDate());
+		SigfoxMessageDto sigfoxMessageDto = SigfoxMessageToDtoConverter.convertToDto(sigfoxMessage);
 
 		ResponseEntity<SigfoxMessageDto> response = new ResponseEntity<SigfoxMessageDto>(sigfoxMessageDto,
 				HttpStatus.OK);
