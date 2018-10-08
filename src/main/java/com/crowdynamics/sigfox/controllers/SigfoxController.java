@@ -2,6 +2,7 @@ package com.crowdynamics.sigfox.controllers;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -33,11 +34,8 @@ public class SigfoxController {
 				.save(SigfoxMessageDtoToMessageConverter.convertToMessage(sigfoxMessageDto));
 
 		// Mapeo entre Model y DTO
-
-		ResponseEntity<SigfoxMessageDto> response = new ResponseEntity<SigfoxMessageDto>(
+		return new ResponseEntity<>(
 				SigfoxMessageToDtoConverter.convertToDto(newSigfoxMessage), HttpStatus.OK);
-
-		return response;
 	}
 
 	@RequestMapping(method = RequestMethod.GET)
@@ -47,29 +45,23 @@ public class SigfoxController {
 		List<SigfoxMessage> sigfoxMessageList = sigFoxMessageService.findAll();
 
 		// Mapeamos entre elementos
-		List<SigfoxMessageDto> sigfoxMessageListDto = new ArrayList<SigfoxMessageDto>();
+		List<SigfoxMessageDto> sigfoxMessageListDto = sigfoxMessageList.stream()
+				.map(SigfoxMessageToDtoConverter::convertToDto)
+				.collect(Collectors.toList());
 
-		sigfoxMessageList.forEach(
-				SigfoxMessage -> sigfoxMessageListDto.add(SigfoxMessageToDtoConverter.convertToDto(SigfoxMessage)));
-
-		ResponseEntity<List<SigfoxMessageDto>> response = new ResponseEntity<List<SigfoxMessageDto>>(
-				sigfoxMessageListDto, HttpStatus.OK);
-
-		return response;
+		return new ResponseEntity<>(sigfoxMessageListDto, HttpStatus.OK);
 	}
 
 	@GetMapping("/{id}")
 	public ResponseEntity<SigfoxMessageDto> getById(@PathVariable(value = "id") Long id) {
+
 		// Recuperamos el mensaje
 		SigfoxMessage sigfoxMessage = sigFoxMessageService.findById(id).get();
 
 		// Mapeo entre Model y DTO
 		SigfoxMessageDto sigfoxMessageDto = SigfoxMessageToDtoConverter.convertToDto(sigfoxMessage);
 
-		ResponseEntity<SigfoxMessageDto> response = new ResponseEntity<SigfoxMessageDto>(sigfoxMessageDto,
+		return new ResponseEntity<>(sigfoxMessageDto,
 				HttpStatus.OK);
-
-		return response;
 	}
-
 }
