@@ -1,16 +1,16 @@
 package com.crowdynamics.sigfox.services;
 
-import java.util.List;
-
+import com.crowdynamics.sigfox.exceptions.SigfoxServiceException;
+import com.crowdynamics.sigfox.model.SigfoxMessage;
+import com.crowdynamics.sigfox.repository.SigfoxMessageDAO;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
-import com.crowdynamics.sigfox.model.SigfoxMessage;
-import com.crowdynamics.sigfox.repository.SigfoxMessageDAO;
-import com.crowdynamics.sigfox.exceptions.SigfoxServiceException;
 import org.springframework.transaction.annotation.Transactional;
+import java.util.List;
+import java.util.Optional;
+import java.util.concurrent.Callable;
 
 @Service
 public class SigFoxMessageServiceImpl implements SigFoxMessageService {
@@ -23,52 +23,37 @@ public class SigFoxMessageServiceImpl implements SigFoxMessageService {
 	@Transactional(rollbackFor = Exception.class)
 	public SigfoxMessage save(SigfoxMessage sigFoxMessage) {
 
-		SigfoxMessage newSigFoxMessage = null;
-
-		try {
-
-			newSigFoxMessage = sigfoxMessageDAO.save(sigFoxMessage);
-
-		} catch (RuntimeException e) {
-			SigFoxMessageServiceImpl.handleUnexpectedError(e);
-		}
-
-		return newSigFoxMessage;
+		return (SigfoxMessage) performOperation(() -> sigfoxMessageDAO.save(sigFoxMessage));
 	}
 
 	@Transactional(readOnly = true)
 	public SigfoxMessage findById(Long id) {
 
-		SigfoxMessage result = null;
+		return ((Optional<SigfoxMessage>) performOperation(() -> sigfoxMessageDAO.findById(id))).orElse(null);
+	}
+
+	@Transactional(readOnly = true)
+	public List<SigfoxMessage> findAll() {
+
+		return (List<SigfoxMessage>) performOperation(() -> sigfoxMessageDAO.findAll());
+	}
+
+	private Object performOperation(Callable<?> function)	{
+
+		Object result = null;
 
 		try {
 
-			result = sigfoxMessageDAO.findById(id).orElse(null);
+			result = function.call();
 
-		} catch (RuntimeException e) {
+		} catch (Exception e) {
 			SigFoxMessageServiceImpl.handleUnexpectedError(e);
 		}
 
 		return result;
 	}
 
-	@Transactional(readOnly = true)
-	public List<SigfoxMessage> findAll() {
-
-		List<SigfoxMessage> sigfoxMessageList = null;
-
-		try {
-
-			sigfoxMessageList = sigfoxMessageDAO.findAll();
-
-		} catch (RuntimeException e) {
-			SigFoxMessageServiceImpl.handleUnexpectedError(e);
-		}
-
-		return sigfoxMessageList;
-	}
-
-	private static void handleUnexpectedError(RuntimeException exception)	{
+	private static void handleUnexpectedError(Exception exception)	{
 
 		LOGGER.error("Error procesando operacion", exception);
 
