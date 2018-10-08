@@ -1,7 +1,6 @@
 package com.crowdynamics.sigfox.services;
 
 import java.util.List;
-import java.util.Optional;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -10,7 +9,7 @@ import org.springframework.stereotype.Service;
 
 import com.crowdynamics.sigfox.model.SigfoxMessage;
 import com.crowdynamics.sigfox.repository.SigfoxMessageDAO;
-import com.crowdynamics.sigfox.sigfoxServiceException.SigfoxServiceException;
+import com.crowdynamics.sigfox.exceptions.SigfoxServiceException;
 import org.springframework.transaction.annotation.Transactional;
 
 @Service
@@ -31,10 +30,7 @@ public class SigFoxMessageServiceImpl implements SigFoxMessageService {
 			newSigFoxMessage = sigfoxMessageDAO.save(sigFoxMessage);
 
 		} catch (RuntimeException e) {
-
-			LOGGER.error("Error guardanda mensaje", e);
-
-			throw new SigfoxServiceException("Error in SigfoxMessageDAO.save ", e);
+			SigFoxMessageServiceImpl.handleUnexpectedError(e);
 		}
 
 		return newSigFoxMessage;
@@ -50,8 +46,7 @@ public class SigFoxMessageServiceImpl implements SigFoxMessageService {
 			result = sigfoxMessageDAO.findById(id).orElse(null);
 
 		} catch (RuntimeException e) {
-
-			throw new SigfoxServiceException("Error in SigfoxMessageDAO.findById ", e);
+			SigFoxMessageServiceImpl.handleUnexpectedError(e);
 		}
 
 		return result;
@@ -67,10 +62,17 @@ public class SigFoxMessageServiceImpl implements SigFoxMessageService {
 			sigfoxMessageList = sigfoxMessageDAO.findAll();
 
 		} catch (RuntimeException e) {
-			throw new SigfoxServiceException("Error in SigfoxMessageDAO.findAll ", e);
+			SigFoxMessageServiceImpl.handleUnexpectedError(e);
 		}
 
 		return sigfoxMessageList;
+	}
+
+	private static void handleUnexpectedError(RuntimeException exception)	{
+
+		LOGGER.error("Error procesando operacion", exception);
+
+		throw new SigfoxServiceException("SigofxMessageServiceError", exception);
 	}
 
 }

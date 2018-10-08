@@ -1,4 +1,4 @@
-package com.crowdynamics.sigfox.sigfoxServiceException;
+package com.crowdynamics.sigfox.exceptions;
 
 public class SigfoxServiceException extends RuntimeException {
 
