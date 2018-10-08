@@ -132,17 +132,9 @@ public class SigfoxMessageServiceTest {
 
 		Long longNotInserted = 10L;
 
-		Optional<SigfoxMessage> sf = sigfoxMessageService.findById(longNotInserted);
+		SigfoxMessage sigfoxMessage = sigfoxMessageService.findById(longNotInserted);
 
-		if (!sf.isPresent()) {
-			SigfoxMessage sigFoxMessage = null;
-			Assert.assertNull(sigFoxMessage);
-		} else {
-
-			SigfoxMessage sigFoxMessage = sf.get();
-			Assert.assertNull(sigFoxMessage);
-		}
-
+		Assert.assertNull(sigfoxMessage);
 	}
 
 	/**
@@ -154,9 +146,7 @@ public class SigfoxMessageServiceTest {
 	@Test
 	public void testFindById() {
 
-		Optional<SigfoxMessage> sf = sigfoxMessageService.findById(4L);
-
-		SigfoxMessage sigFoxMessage = sf.get();
+		SigfoxMessage sigFoxMessage = sigfoxMessageService.findById(4L);
 
 		Assert.assertNotNull(sigFoxMessage);
 		Assert.assertNotNull(sigFoxMessage.getId());

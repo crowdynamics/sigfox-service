@@ -49,7 +49,7 @@ public class SigfoxController {
 	public ResponseEntity<SigfoxMessageDto> getById(@PathVariable(value = "id") Long id) {
 
 		// Recuperamos el mensaje
-		SigfoxMessage sigfoxMessage = sigFoxMessageService.findById(id).get();
+		SigfoxMessage sigfoxMessage = sigFoxMessageService.findById(id);
 
 		// Mapeo entre Model y DTO
 		SigfoxMessageDto sigfoxMessageDto = SigfoxMessageToDtoConverter.convertToDto(sigfoxMessage);
