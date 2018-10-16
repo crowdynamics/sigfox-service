@@ -20,12 +20,16 @@ public class SigfoxMessageToDtoConverter {
 		receptionDto.setSnr(sigfoxMessage.getReceptionSnr());
 		
 		SigfoxMessageDto sigfoxMessageDto= new SigfoxMessageDto();
-		sigfoxMessageDto.setDeviceId(sigfoxMessage.getDeviceId());
+
 		sigfoxMessageDto.setId(sigfoxMessage.getId());
-		sigfoxMessageDto.setReception(receptionDto);
+
+		sigfoxMessageDto.setDeviceId(sigfoxMessage.getDeviceId());
 		sigfoxMessageDto.setSeqNumber(sigfoxMessage.getSeqnumer());
 		sigfoxMessageDto.setTime(sigfoxMessage.getMessageDate());
-		
+
+		sigfoxMessageDto.setGeoloc(geoLocDto);
+		sigfoxMessageDto.setReception(receptionDto);
+
 		return sigfoxMessageDto;
 		
 		
