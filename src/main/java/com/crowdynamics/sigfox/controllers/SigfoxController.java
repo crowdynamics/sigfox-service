@@ -4,6 +4,7 @@ import com.crowdynamics.sigfox.converters.SigfoxMessageDtoToMessageConverter;
 import com.crowdynamics.sigfox.converters.SigfoxMessageToDtoConverter;
 import com.crowdynamics.sigfox.dto.SigfoxMessageDto;
 import com.crowdynamics.sigfox.model.SigfoxMessage;
+import com.crowdynamics.sigfox.services.SigFoxMessageService;
 import com.crowdynamics.sigfox.services.SigFoxMessageServiceImpl;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -16,7 +17,7 @@ import java.util.stream.Collectors;
 @RequestMapping(value = "/sigfox")
 public class SigfoxController {
 
-	private SigFoxMessageServiceImpl sigFoxMessageService;
+	private SigFoxMessageService sigFoxMessageService;
 
 	@RequestMapping(method = RequestMethod.POST)
 	public ResponseEntity<SigfoxMessageDto> create(@RequestBody SigfoxMessageDto sigfoxMessageDto) {
