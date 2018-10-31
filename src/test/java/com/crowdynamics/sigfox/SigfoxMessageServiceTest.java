@@ -49,7 +49,7 @@ public class SigfoxMessageServiceTest {
 	@Test
 	public void testFindAll() {
 
-		List<SigfoxMessage> sigFoxMessageList = sigfoxMessageService.findAll();
+		List<SigfoxMessage> sigFoxMessageList = sigfoxMessageService.findAll("12345");
 
 		Assert.assertNotNull(sigFoxMessageList);
 		Assert.assertEquals(1, sigFoxMessageList.size());
@@ -114,7 +114,7 @@ public class SigfoxMessageServiceTest {
 	@Test
 	public void testFindAllEmpty() {
 
-		List<SigfoxMessage> sigFoxMessageList = sigfoxMessageService.findAll();
+		List<SigfoxMessage> sigFoxMessageList = sigfoxMessageService.findAll("123456");
 
 		Assert.assertNotNull(sigFoxMessageList);
 		Assert.assertEquals(0, sigFoxMessageList.size());
