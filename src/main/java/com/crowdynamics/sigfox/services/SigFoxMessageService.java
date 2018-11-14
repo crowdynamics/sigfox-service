@@ -10,6 +10,6 @@ public interface SigFoxMessageService {
 
 	SigfoxMessage findById(Long id);
 
-	List<SigfoxMessage> findAll(String deviceID);
+	List<SigfoxMessage> findByDeviceId(String deviceID);
 
 }

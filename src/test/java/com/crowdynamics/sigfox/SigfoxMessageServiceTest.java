@@ -5,7 +5,6 @@ import java.sql.Timestamp;
 import java.util.Calendar;
 import java.util.GregorianCalendar;
 import java.util.List;
-import java.util.Optional;
 
 import org.junit.Assert;
 import org.junit.Test;
@@ -47,9 +46,9 @@ public class SigfoxMessageServiceTest {
 	@Sql({ "classpath:insertSigFoxMessage.sql" })
 	@Rollback(true)
 	@Test
-	public void testFindAll() {
+	public void testFindByDeviceId() {
 
-		List<SigfoxMessage> sigFoxMessageList = sigfoxMessageService.findAll("12345");
+		List<SigfoxMessage> sigFoxMessageList = sigfoxMessageService.findByDeviceId("TEST01");
 
 		Assert.assertNotNull(sigFoxMessageList);
 		Assert.assertEquals(1, sigFoxMessageList.size());
@@ -112,9 +111,9 @@ public class SigfoxMessageServiceTest {
 	 */
 	@Rollback(true)
 	@Test
-	public void testFindAllEmpty() {
+	public void testFindByDeviceIdEmpty() {
 
-		List<SigfoxMessage> sigFoxMessageList = sigfoxMessageService.findAll("123456");
+		List<SigfoxMessage> sigFoxMessageList = sigfoxMessageService.findByDeviceId("123456");
 
 		Assert.assertNotNull(sigFoxMessageList);
 		Assert.assertEquals(0, sigFoxMessageList.size());
@@ -146,7 +145,7 @@ public class SigfoxMessageServiceTest {
 	@Test
 	public void testFindById() {
 
-		SigfoxMessage sigFoxMessage = sigfoxMessageService.findById(4L);
+		SigfoxMessage sigFoxMessage = sigfoxMessageService.findById(ID);
 
 		Assert.assertNotNull(sigFoxMessage);
 		Assert.assertNotNull(sigFoxMessage.getId());
@@ -161,5 +160,4 @@ public class SigfoxMessageServiceTest {
 		Assert.assertTrue(GEO_LOC_RADIUS.compareTo(sigFoxMessage.getGeolocRadius()) == 0);
 
 	}
-
 }
