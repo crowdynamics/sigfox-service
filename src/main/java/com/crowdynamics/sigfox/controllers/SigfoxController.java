@@ -35,7 +35,7 @@ public class SigfoxController {
 	}
 
 	@RequestMapping(method = RequestMethod.GET)
-	public ResponseEntity<List<SigfoxMessageDto>> get(@RequestParam String deviceID) {
+	public ResponseEntity<List<SigfoxMessageDto>> get(String deviceID) {
 
 		// Recuperamos todos los mensajes
 		List<SigfoxMessage> sigfoxMessageList = sigFoxMessageService.findAll(deviceID);

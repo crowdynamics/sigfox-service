@@ -35,7 +35,7 @@ public class SigFoxMessageServiceImpl implements SigFoxMessageService {
 	@Transactional(readOnly = true)
 	public List<SigfoxMessage> findAll(String deviceID) {
 
-		return (List<SigfoxMessage>) performOperation(() -> sigfoxMessageDAO.findMessageByDeviceID(deviceID));
+		return (List<SigfoxMessage>) performOperation(() -> sigfoxMessageDAO.findMessageByDeviceId(deviceID));
 	}
 
 	private Object performOperation(Callable<?> function)	{
